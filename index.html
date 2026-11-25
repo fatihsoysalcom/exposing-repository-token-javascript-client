@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bitbucket Token Exposure Demo</title>
+    <style>
+        body { font-family: sans-serif; margin: 20px; line-height: 1.6; background-color: #f4f4f4; color: #333; }
+        h1, h2 { color: #0052cc; }
+        pre { background-color: #e6e6e6; padding: 15px; border-radius: 5px; overflow-x: auto; font-family: 'Courier New', monospace; }
+        .warning { color: #d9534f; font-weight: bold; background-color: #fdf7f7; border: 1px solid #f2dede; padding: 10px; border-radius: 4px; margin-top: 15px; }
+        code { background-color: #e6e6e6; padding: 2px 4px; border-radius: 3px; }
+    </style>
+</head>
+<body>
+    <h1>Bitbucket Pipelines Token Exposure Demo</h1>
+    <p>This example demonstrates how a sensitive "repository access token" could accidentally be embedded and exposed in a client-side JavaScript application, making it visible to anyone inspecting the page.</p>
+    <p class="warning"><strong>WARNING:</strong> In a real application, never embed sensitive tokens directly in client-side code. This is for demonstration purposes only and simulates a critical security vulnerability.</p>
+
+    <h2>Simulated Exposed Token:</h2>
+    <pre id="tokenDisplay">Token will appear here if exposed...</pre>
+
+    <script>
+        // --- ARTICLE CONCEPT ILLUSTRATION START ---
+        // In a real Bitbucket Pipelines scenario, a repository access token
+        // might be injected during the build process (e.g., from an environment variable)
+        // and accidentally bundled into the client-side JavaScript artifact.
+        // This makes the token publicly accessible to anyone viewing the web application.
+        const BITBUCKET_REPO_ACCESS_TOKEN = "bb_atlassian_token_ghs_1234567890abcdef1234567890abcdef"; // Simulated sensitive token
+
+        console.log("--- Bitbucket Token Exposure Demo ---");
+        console.log("If you see a token below, it means it's exposed in client-side code.");
+        console.log("Simulated Bitbucket Repository Access Token:", BITBUCKET_REPO_ACCESS_TOKEN); // Token logged to browser console
+
+        // Displaying the token directly on the page for clear visibility in this demo,
+        // mimicking how it might be accidentally rendered or used in a client-side context.
+        const tokenDisplayElement = document.getElementById('tokenDisplay');
+        if (tokenDisplayElement) {
+            tokenDisplayElement.textContent = BITBUCKET_REPO_ACCESS_TOKEN; // Token displayed on the web page
+        }
+        // --- ARTICLE CONCEPT ILLUSTRATION END ---
+
+        console.log("\nTo see the exposure, open your browser's developer tools (F12 or Ctrl+Shift+I),");
+        console.log("go to the 'Console' tab, or 'Sources' tab to view this script's content.");
+    </script>
+</body>
+</html>
